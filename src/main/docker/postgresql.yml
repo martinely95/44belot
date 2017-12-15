@@ -1,0 +1,11 @@
+version: '2'
+services:
+    four_for_belot-postgresql:
+        image: postgres:9.6.5
+        # volumes:
+        #     - ~/volumes/jhipster/four_for_belot/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=four_for_belot
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
