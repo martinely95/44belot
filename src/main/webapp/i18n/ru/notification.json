@@ -1,0 +1,25 @@
+{
+    "fourForBelotApp": {
+        "notification" : {
+            "home": {
+                "title": "Notifications",
+                "createLabel": "Создать новый Notification",
+                "createOrEditLabel": "Создать или отредактировать Notification"
+            },
+            "created": "Новый Notification создан с идентификатором {{ param }}",
+            "updated": "Notification обновлен с идентификатором {{ param }}",
+            "deleted": "Notification удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Notification {{ id }}?"
+            },
+            "detail": {
+                "title": "Notification"
+            },
+            "text": "Text",
+            "link": "Link",
+            "dateTime": "Date Time",
+            "game": "Game",
+            "profileToBeNotified": "Profile To Be Notified"
+        }
+    }
+}

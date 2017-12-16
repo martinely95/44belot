@@ -1,0 +1,56 @@
+
+<div *ngIf="profile">
+    <h2><span jhiTranslate="fourForBelotApp.profile.detail.title">Profile</span> {{profile.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fourForBelotApp.profile.language">Language</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fourForBelotApp.Language.' + profile.language}}">{{profile.language}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.sex">Sex</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fourForBelotApp.Sex.' + profile.sex}}">{{profile.sex}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.age">Age</span></dt>
+        <dd>
+            <span>{{profile.age}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.gamesPlayed">Games Played</span></dt>
+        <dd>
+            <span>{{profile.gamesPlayed}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.gamesWon">Games Won</span></dt>
+        <dd>
+            <span>{{profile.gamesWon}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.gamesLost">Games Lost</span></dt>
+        <dd>
+            <span>{{profile.gamesLost}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.user">User</span></dt>
+        <dd>
+            {{profile.userId}}
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.profile.categoriesOfInterest">Categories Of Interest</span></dt>
+        <dd>
+            <span *ngFor="let categoriesOfInterest of profile.categoriesOfInterests; let last = last">
+                <a [routerLink]="['/category', categoriesOfInterest?.id ]">{{categoriesOfInterest.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'profile/'+ profile.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

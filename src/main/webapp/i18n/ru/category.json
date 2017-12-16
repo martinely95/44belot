@@ -1,0 +1,27 @@
+{
+    "fourForBelotApp": {
+        "category" : {
+            "home": {
+                "title": "Categories",
+                "createLabel": "Создать новый Category",
+                "createOrEditLabel": "Создать или отредактировать Category"
+            },
+            "created": "Новый Category создан с идентификатором {{ param }}",
+            "updated": "Category обновлен с идентификатором {{ param }}",
+            "deleted": "Category удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Category"
+            },
+            "name": "Name",
+            "description": "Description",
+            "gamesPlayed": "Games Played",
+            "child": "Child",
+            "parent": "Parent",
+            "interestedProfiles": "Interested Profiles",
+            "gamesWithThisCategory": "Games With This Category"
+        }
+    }
+}

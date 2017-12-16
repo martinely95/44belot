@@ -1,0 +1,72 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProfileLabel" jhiTranslate="fourForBelotApp.profile.home.createOrEditLabel">Create or edit a Profile</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!profile.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="profile.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.language" for="field_language">Language</label>
+            <select class="form-control" name="language" [(ngModel)]="profile.language" id="field_language" >
+                <option value="ENGLISH">{{'fourForBelotApp.Language.ENGLISH' | translate}}</option>
+                <option value="RUSSIAN">{{'fourForBelotApp.Language.RUSSIAN' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.sex" for="field_sex">Sex</label>
+            <select class="form-control" name="sex" [(ngModel)]="profile.sex" id="field_sex" >
+                <option value="MALE">{{'fourForBelotApp.Sex.MALE' | translate}}</option>
+                <option value="FEMALE">{{'fourForBelotApp.Sex.FEMALE' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.age" for="field_age">Age</label>
+            <input type="number" class="form-control" name="age" id="field_age"
+                [(ngModel)]="profile.age" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.gamesPlayed" for="field_gamesPlayed">Games Played</label>
+            <input type="number" class="form-control" name="gamesPlayed" id="field_gamesPlayed"
+                [(ngModel)]="profile.gamesPlayed" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.gamesWon" for="field_gamesWon">Games Won</label>
+            <input type="number" class="form-control" name="gamesWon" id="field_gamesWon"
+                [(ngModel)]="profile.gamesWon" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.gamesLost" for="field_gamesLost">Games Lost</label>
+            <input type="number" class="form-control" name="gamesLost" id="field_gamesLost"
+                [(ngModel)]="profile.gamesLost" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.profile.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="profile.userId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="fourForBelotApp.profile.categoriesOfInterest" for="field_categoriesOfInterest">Categories Of Interest</label>
+            <select class="form-control" id="field_categoriesOfInterest" multiple name="categoriesOfInterest" [(ngModel)]="profile.categoriesOfInterests">
+                <option [ngValue]="getSelected(profile.categoriesOfInterests, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

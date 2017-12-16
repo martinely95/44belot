@@ -1,0 +1,40 @@
+
+<div *ngIf="category">
+    <h2><span jhiTranslate="fourForBelotApp.category.detail.title">Category</span> {{category.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fourForBelotApp.category.name">Name</span></dt>
+        <dd>
+            <span>{{category.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.category.description">Description</span></dt>
+        <dd>
+            <span>{{category.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.category.gamesPlayed">Games Played</span></dt>
+        <dd>
+            <span>{{category.gamesPlayed}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.category.parent">Parent</span></dt>
+        <dd>
+            <div *ngIf="category.parentId">
+                <a [routerLink]="['/category', category.parentId]">{{category.parentId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'category/'+ category.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

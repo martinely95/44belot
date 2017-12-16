@@ -1,0 +1,82 @@
+
+<div *ngIf="game">
+    <h2><span jhiTranslate="fourForBelotApp.game.detail.title">Game</span> {{game.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fourForBelotApp.game.name">Name</span></dt>
+        <dd>
+            <span>{{game.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.description">Description</span></dt>
+        <dd>
+            <span>{{game.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.requiredPeopleCount">Required People Count</span></dt>
+        <dd>
+            <span>{{game.requiredPeopleCount}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.currentlyAvalablePeople">Currently Avalable People</span></dt>
+        <dd>
+            <span>{{game.currentlyAvalablePeople}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.createdDateTime">Created Date Time</span></dt>
+        <dd>
+            <span>{{game.createdDateTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.startDateTime">Start Date Time</span></dt>
+        <dd>
+            <span>{{game.startDateTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.endDateTime">End Date Time</span></dt>
+        <dd>
+            <span>{{game.endDateTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.requiresApprovalForJoining">Requires Approval For Joining</span></dt>
+        <dd>
+            <span>{{game.requiresApprovalForJoining}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.isAvailableForJoining">Is Available For Joining</span></dt>
+        <dd>
+            <span>{{game.isAvailableForJoining}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.categories">Categories</span></dt>
+        <dd>
+            <span *ngFor="let categories of game.categories; let last = last">
+                <a [routerLink]="['/category', categories?.id ]">{{categories.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.playersProfiles">Players Profiles</span></dt>
+        <dd>
+            <span *ngFor="let playersProfiles of game.playersProfiles; let last = last">
+                <a [routerLink]="['/profile', playersProfiles?.id ]">{{playersProfiles.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.location">Location</span></dt>
+        <dd>
+            <div *ngIf="game.locationId">
+                <a [routerLink]="['/location', game.locationId]">{{game.locationId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.game.creatorProfile">Creator Profile</span></dt>
+        <dd>
+            <div *ngIf="game.creatorProfileId">
+                <a [routerLink]="['/profile', game.creatorProfileId]">{{game.creatorProfileId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'game/'+ game.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

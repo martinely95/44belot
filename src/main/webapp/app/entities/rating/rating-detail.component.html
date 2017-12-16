@@ -1,0 +1,52 @@
+
+<div *ngIf="rating">
+    <h2><span jhiTranslate="fourForBelotApp.rating.detail.title">Rating</span> {{rating.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="fourForBelotApp.rating.teamPlayer">Team Player</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fourForBelotApp.RatingScore.' + rating.teamPlayer}}">{{rating.teamPlayer}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.rating.friendly">Friendly</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fourForBelotApp.RatingScore.' + rating.friendly}}">{{rating.friendly}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.rating.leader">Leader</span></dt>
+        <dd>
+            <span jhiTranslate="{{'fourForBelotApp.RatingScore.' + rating.leader}}">{{rating.leader}}</span>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.rating.playedGame">Played Game</span></dt>
+        <dd>
+            <div *ngIf="rating.playedGameId">
+                <a [routerLink]="['/game', rating.playedGameId]">{{rating.playedGameId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.rating.giverProfile">Giver Profile</span></dt>
+        <dd>
+            <div *ngIf="rating.giverProfileId">
+                <a [routerLink]="['/profile', rating.giverProfileId]">{{rating.giverProfileId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="fourForBelotApp.rating.receiverProfile">Receiver Profile</span></dt>
+        <dd>
+            <div *ngIf="rating.receiverProfileId">
+                <a [routerLink]="['/profile', rating.receiverProfileId]">{{rating.receiverProfileId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'rating/'+ rating.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

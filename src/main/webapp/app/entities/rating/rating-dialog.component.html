@@ -1,0 +1,76 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRatingLabel" jhiTranslate="fourForBelotApp.rating.home.createOrEditLabel">Create or edit a Rating</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!rating.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="rating.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.rating.teamPlayer" for="field_teamPlayer">Team Player</label>
+            <select class="form-control" name="teamPlayer" [(ngModel)]="rating.teamPlayer" id="field_teamPlayer" >
+                <option value="BAD">{{'fourForBelotApp.RatingScore.BAD' | translate}}</option>
+                <option value="MODERATE">{{'fourForBelotApp.RatingScore.MODERATE' | translate}}</option>
+                <option value="GOOD">{{'fourForBelotApp.RatingScore.GOOD' | translate}}</option>
+                <option value="EXPERT">{{'fourForBelotApp.RatingScore.EXPERT' | translate}}</option>
+                <option value="GOD">{{'fourForBelotApp.RatingScore.GOD' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.rating.friendly" for="field_friendly">Friendly</label>
+            <select class="form-control" name="friendly" [(ngModel)]="rating.friendly" id="field_friendly" >
+                <option value="BAD">{{'fourForBelotApp.RatingScore.BAD' | translate}}</option>
+                <option value="MODERATE">{{'fourForBelotApp.RatingScore.MODERATE' | translate}}</option>
+                <option value="GOOD">{{'fourForBelotApp.RatingScore.GOOD' | translate}}</option>
+                <option value="EXPERT">{{'fourForBelotApp.RatingScore.EXPERT' | translate}}</option>
+                <option value="GOD">{{'fourForBelotApp.RatingScore.GOD' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.rating.leader" for="field_leader">Leader</label>
+            <select class="form-control" name="leader" [(ngModel)]="rating.leader" id="field_leader" >
+                <option value="BAD">{{'fourForBelotApp.RatingScore.BAD' | translate}}</option>
+                <option value="MODERATE">{{'fourForBelotApp.RatingScore.MODERATE' | translate}}</option>
+                <option value="GOOD">{{'fourForBelotApp.RatingScore.GOOD' | translate}}</option>
+                <option value="EXPERT">{{'fourForBelotApp.RatingScore.EXPERT' | translate}}</option>
+                <option value="GOD">{{'fourForBelotApp.RatingScore.GOD' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.rating.playedGame" for="field_playedGame">Played Game</label>
+            <select class="form-control" id="field_playedGame" name="playedGame" [(ngModel)]="rating.playedGameId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="gameOption.id" *ngFor="let gameOption of games; trackBy: trackGameById">{{gameOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.rating.giverProfile" for="field_giverProfile">Giver Profile</label>
+            <select class="form-control" id="field_giverProfile" name="giverProfile" [(ngModel)]="rating.giverProfileId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="profileOption.id" *ngFor="let profileOption of profiles; trackBy: trackProfileById">{{profileOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.rating.receiverProfile" for="field_receiverProfile">Receiver Profile</label>
+            <select class="form-control" id="field_receiverProfile" name="receiverProfile" [(ngModel)]="rating.receiverProfileId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="profileOption.id" *ngFor="let profileOption of profiles; trackBy: trackProfileById">{{profileOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+{
+    "fourForBelotApp": {
+        "game" : {
+            "home": {
+                "title": "Games",
+                "createLabel": "Создать новый Game",
+                "createOrEditLabel": "Создать или отредактировать Game"
+            },
+            "created": "Новый Game создан с идентификатором {{ param }}",
+            "updated": "Game обновлен с идентификатором {{ param }}",
+            "deleted": "Game удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Game {{ id }}?"
+            },
+            "detail": {
+                "title": "Game"
+            },
+            "name": "Name",
+            "description": "Description",
+            "requiredPeopleCount": "Required People Count",
+            "currentlyAvalablePeople": "Currently Avalable People",
+            "createdDateTime": "Created Date Time",
+            "startDateTime": "Start Date Time",
+            "endDateTime": "End Date Time",
+            "requiresApprovalForJoining": "Requires Approval For Joining",
+            "isAvailableForJoining": "Is Available For Joining",
+            "notifications": "Notifications",
+            "ratings": "Ratings",
+            "categories": "Categories",
+            "playersProfiles": "Players Profiles",
+            "location": "Location",
+            "creatorProfile": "Creator Profile"
+        }
+    }
+}

@@ -44,6 +44,30 @@ public class CacheConfiguration {
             cm.createCache(eu.dreamix.four_for_belot.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(eu.dreamix.four_for_belot.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
             cm.createCache(eu.dreamix.four_for_belot.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Category.class.getName() + ".children", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Location.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Location.class.getName() + ".games", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".receivedRatings", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".createdGames", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Game.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Game.class.getName() + ".notifications", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Game.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Game.class.getName() + ".profiles", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Notification.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Notification.class.getName() + ".profiles", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Rating.class.getName(), jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".categoriesOfInterests", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".notifications", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Category.class.getName() + ".interestedProfiles", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Category.class.getName() + ".games", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".givenRatings", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Profile.class.getName() + ".playedGames", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Game.class.getName() + ".ratings", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Game.class.getName() + ".playersProfiles", jcacheConfiguration);
+            cm.createCache(eu.dreamix.four_for_belot.domain.Category.class.getName() + ".gamesWithThisCategories", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

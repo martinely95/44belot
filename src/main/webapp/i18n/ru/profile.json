@@ -1,0 +1,33 @@
+{
+    "fourForBelotApp": {
+        "profile" : {
+            "home": {
+                "title": "Profiles",
+                "createLabel": "Создать новый Profile",
+                "createOrEditLabel": "Создать или отредактировать Profile"
+            },
+            "created": "Новый Profile создан с идентификатором {{ param }}",
+            "updated": "Profile обновлен с идентификатором {{ param }}",
+            "deleted": "Profile удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Profile {{ id }}?"
+            },
+            "detail": {
+                "title": "Profile"
+            },
+            "language": "Language",
+            "sex": "Sex",
+            "age": "Age",
+            "gamesPlayed": "Games Played",
+            "gamesWon": "Games Won",
+            "gamesLost": "Games Lost",
+            "user": "User",
+            "notifications": "Notifications",
+            "createdGames": "Created Games",
+            "givenRatings": "Given Ratings",
+            "receivedRatings": "Received Ratings",
+            "categoriesOfInterest": "Categories Of Interest",
+            "playedGames": "Played Games"
+        }
+    }
+}

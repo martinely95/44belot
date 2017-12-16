@@ -1,0 +1,160 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myGameLabel" jhiTranslate="fourForBelotApp.game.home.createOrEditLabel">Create or edit a Game</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!game.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="game.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="game.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="game.description" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.requiredPeopleCount" for="field_requiredPeopleCount">Required People Count</label>
+            <input type="number" class="form-control" name="requiredPeopleCount" id="field_requiredPeopleCount"
+                [(ngModel)]="game.requiredPeopleCount" required/>
+            <div [hidden]="!(editForm.controls.requiredPeopleCount?.dirty && editForm.controls.requiredPeopleCount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.requiredPeopleCount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.requiredPeopleCount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.currentlyAvalablePeople" for="field_currentlyAvalablePeople">Currently Avalable People</label>
+            <input type="number" class="form-control" name="currentlyAvalablePeople" id="field_currentlyAvalablePeople"
+                [(ngModel)]="game.currentlyAvalablePeople" required/>
+            <div [hidden]="!(editForm.controls.currentlyAvalablePeople?.dirty && editForm.controls.currentlyAvalablePeople?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.currentlyAvalablePeople?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.currentlyAvalablePeople?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.createdDateTime" for="field_createdDateTime">Created Date Time</label>
+            <div class="d-flex">
+                <input id="field_createdDateTime" type="datetime-local" class="form-control" name="createdDateTime" [(ngModel)]="game.createdDateTime"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.createdDateTime?.dirty && editForm.controls.createdDateTime?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdDateTime?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdDateTime?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.startDateTime" for="field_startDateTime">Start Date Time</label>
+            <div class="d-flex">
+                <input id="field_startDateTime" type="datetime-local" class="form-control" name="startDateTime" [(ngModel)]="game.startDateTime"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.startDateTime?.dirty && editForm.controls.startDateTime?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.startDateTime?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.startDateTime?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.endDateTime" for="field_endDateTime">End Date Time</label>
+            <div class="d-flex">
+                <input id="field_endDateTime" type="datetime-local" class="form-control" name="endDateTime" [(ngModel)]="game.endDateTime"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.requiresApprovalForJoining" for="field_requiresApprovalForJoining">Requires Approval For Joining</label>
+            <input type="checkbox" class="form-control" name="requiresApprovalForJoining" id="field_requiresApprovalForJoining"
+                [(ngModel)]="game.requiresApprovalForJoining" />
+            <div [hidden]="!(editForm.controls.requiresApprovalForJoining?.dirty && editForm.controls.requiresApprovalForJoining?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.requiresApprovalForJoining?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.isAvailableForJoining" for="field_isAvailableForJoining">Is Available For Joining</label>
+            <input type="checkbox" class="form-control" name="isAvailableForJoining" id="field_isAvailableForJoining"
+                [(ngModel)]="game.isAvailableForJoining" />
+            <div [hidden]="!(editForm.controls.isAvailableForJoining?.dirty && editForm.controls.isAvailableForJoining?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.isAvailableForJoining?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="fourForBelotApp.game.categories" for="field_categories">Categories</label>
+            <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="game.categories">
+                <option [ngValue]="getSelected(game.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="fourForBelotApp.game.playersProfiles" for="field_playersProfiles">Players Profiles</label>
+            <select class="form-control" id="field_playersProfiles" multiple name="playersProfiles" [(ngModel)]="game.playersProfiles">
+                <option [ngValue]="getSelected(game.playersProfiles, profileOption)" *ngFor="let profileOption of profiles; trackBy: trackProfileById">{{profileOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.location" for="field_location">Location</label>
+            <select class="form-control" id="field_location" name="location" [(ngModel)]="game.locationId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="fourForBelotApp.game.creatorProfile" for="field_creatorProfile">Creator Profile</label>
+            <select class="form-control" id="field_creatorProfile" name="creatorProfile" [(ngModel)]="game.creatorProfileId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="profileOption.id" *ngFor="let profileOption of profiles; trackBy: trackProfileById">{{profileOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

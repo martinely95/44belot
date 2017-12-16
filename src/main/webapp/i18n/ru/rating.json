@@ -1,0 +1,26 @@
+{
+    "fourForBelotApp": {
+        "rating" : {
+            "home": {
+                "title": "Ratings",
+                "createLabel": "Создать новый Rating",
+                "createOrEditLabel": "Создать или отредактировать Rating"
+            },
+            "created": "Новый Rating создан с идентификатором {{ param }}",
+            "updated": "Rating обновлен с идентификатором {{ param }}",
+            "deleted": "Rating удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Rating {{ id }}?"
+            },
+            "detail": {
+                "title": "Rating"
+            },
+            "teamPlayer": "Team Player",
+            "friendly": "Friendly",
+            "leader": "Leader",
+            "playedGame": "Played Game",
+            "giverProfile": "Giver Profile",
+            "receiverProfile": "Receiver Profile"
+        }
+    }
+}

@@ -1,0 +1,94 @@
+<div>
+    <h2>
+        <span jhiTranslate="fourForBelotApp.game.home.title">Games</span>
+        <button class="btn btn-primary float-right jh-create-entity create-game" [routerLink]="['/', { outlets: { popup: ['game-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="fourForBelotApp.game.home.createLabel">
+            Create new Game
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="games">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="fourForBelotApp.game.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="description"><span jhiTranslate="fourForBelotApp.game.description">Description</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="requiredPeopleCount"><span jhiTranslate="fourForBelotApp.game.requiredPeopleCount">Required People Count</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="currentlyAvalablePeople"><span jhiTranslate="fourForBelotApp.game.currentlyAvalablePeople">Currently Avalable People</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDateTime"><span jhiTranslate="fourForBelotApp.game.createdDateTime">Created Date Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="startDateTime"><span jhiTranslate="fourForBelotApp.game.startDateTime">Start Date Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="endDateTime"><span jhiTranslate="fourForBelotApp.game.endDateTime">End Date Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="requiresApprovalForJoining"><span jhiTranslate="fourForBelotApp.game.requiresApprovalForJoining">Requires Approval For Joining</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="isAvailableForJoining"><span jhiTranslate="fourForBelotApp.game.isAvailableForJoining">Is Available For Joining</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="locationId"><span jhiTranslate="fourForBelotApp.game.location">Location</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="creatorProfileId"><span jhiTranslate="fourForBelotApp.game.creatorProfile">Creator Profile</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let game of games ;trackBy: trackId">
+                <td><a [routerLink]="['../game', game.id ]">{{game.id}}</a></td>
+                <td>{{game.name}}</td>
+                <td>{{game.description}}</td>
+                <td>{{game.requiredPeopleCount}}</td>
+                <td>{{game.currentlyAvalablePeople}}</td>
+                <td>{{game.createdDateTime | date:'medium'}}</td>
+                <td>{{game.startDateTime | date:'medium'}}</td>
+                <td>{{game.endDateTime | date:'medium'}}</td>
+                <td>{{game.requiresApprovalForJoining}}</td>
+                <td>{{game.isAvailableForJoining}}</td>
+                <td>
+                    <div *ngIf="game.locationId">
+                        <a [routerLink]="['../location', game.locationId  ]" >{{game.locationId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="game.creatorProfileId">
+                        <a [routerLink]="['../profile', game.creatorProfileId  ]" >{{game.creatorProfileId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../game', game.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'game/'+ game.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'game/'+ game.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="games && games.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

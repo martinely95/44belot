@@ -1,0 +1,12 @@
+{
+    "fourForBelotApp": {
+        "RatingScore" : {
+            "null": "",
+            "BAD": "BAD",
+            "MODERATE": "MODERATE",
+            "GOOD": "GOOD",
+            "EXPERT": "EXPERT",
+            "GOD": "GOD"
+        }
+    }
+}
