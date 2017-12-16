@@ -1,0 +1,87 @@
+enum RatingScore {
+	BAD, MODERATE, GOOD, EXPERT, GOD 
+}
+
+entity Category {
+    name String required,
+    description String,
+    gamesPlayed Long
+}
+
+entity Location {
+	name String required,
+    description String,
+    longtitude Double required,
+    latitude Double required,
+    url String
+}
+
+enum Sex {
+	MALE, FEMALE
+}
+
+enum Language {
+    ENGLISH, RUSSIAN
+}
+
+entity Profile {
+	language Language,
+    sex Sex,
+    age Integer,
+    gamesPlayed Long,
+    gamesWon Long,
+    gamesLost Long
+}
+
+entity Game {
+	name String required,
+	description String,
+    requiredPeopleCount Integer required,
+    currentlyAvalablePeople Integer required,
+    createdDateTime ZonedDateTime required,
+    startDateTime ZonedDateTime required,
+    endDateTime ZonedDateTime,
+    requiresApprovalForJoining Boolean required,
+    isAvailableForJoining Boolean required
+}
+
+entity Notification {
+	text String required,
+    link String,
+    dateTime ZonedDateTime required
+}
+
+entity Rating { 
+	teamPlayer RatingScore,
+    friendly RatingScore,
+    leader RatingScore
+}
+
+relationship OneToOne {
+	Profile{user} to User{profile}
+}
+
+relationship ManyToMany {
+	Profile{categoriesOfInterest} to Category{interestedProfiles},
+    Game{categories} to Category{gamesWithThisCategory},
+    Game{playersProfiles} to Profile{playedGames}
+}
+
+relationship OneToMany {
+    Game{notifications} to Notification{game},
+    Profile{notifications} to Notification{profileToBeNotified},
+    Location{games} to Game{location},
+    Category{child} to Category{parent},
+    Profile{createdGames} to Game{creatorProfile},
+    Game{ratings} to Rating{playedGame},
+    Profile{givenRatings} to Rating{giverProfile},
+    Profile{receivedRatings} to Rating{receiverProfile}
+}
+
+// Set pagination options
+paginate Game, Notification with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
