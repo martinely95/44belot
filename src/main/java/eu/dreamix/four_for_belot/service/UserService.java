@@ -2,15 +2,19 @@ package eu.dreamix.four_for_belot.service;
 
 import eu.dreamix.four_for_belot.config.Constants;
 import eu.dreamix.four_for_belot.domain.Authority;
+import eu.dreamix.four_for_belot.domain.Profile;
 import eu.dreamix.four_for_belot.domain.User;
 import eu.dreamix.four_for_belot.repository.AuthorityRepository;
 import eu.dreamix.four_for_belot.repository.PersistentTokenRepository;
 import eu.dreamix.four_for_belot.repository.UserRepository;
 import eu.dreamix.four_for_belot.security.AuthoritiesConstants;
 import eu.dreamix.four_for_belot.security.SecurityUtils;
+import eu.dreamix.four_for_belot.service.dto.ProfileDTO;
 import eu.dreamix.four_for_belot.service.dto.UserDTO;
 import eu.dreamix.four_for_belot.service.util.RandomUtil;
 import eu.dreamix.four_for_belot.web.rest.AccountResource;
+import eu.dreamix.four_for_belot.web.rest.ProfileResource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -22,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -56,6 +61,9 @@ public class UserService {
 
     @Inject
     private AccountResource accountResource;
+
+    @Inject
+    private ProfileResource profileResource;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
@@ -125,6 +133,14 @@ public class UserService {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+        userRepository.flush();
+        ProfileDTO newProfile = new ProfileDTO();
+        newProfile.setUserId(newUser.getId());
+        try {
+            profileResource.createProfile(newProfile);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
