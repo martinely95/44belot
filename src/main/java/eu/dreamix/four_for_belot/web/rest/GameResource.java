@@ -1,7 +1,11 @@
 package eu.dreamix.four_for_belot.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import eu.dreamix.four_for_belot.domain.User;
 import eu.dreamix.four_for_belot.service.GameService;
+import eu.dreamix.four_for_belot.service.ProfileService;
+import eu.dreamix.four_for_belot.service.UserService;
+import eu.dreamix.four_for_belot.service.dto.ProfileDTO;
 import eu.dreamix.four_for_belot.web.rest.errors.BadRequestAlertException;
 import eu.dreamix.four_for_belot.web.rest.util.HeaderUtil;
 import eu.dreamix.four_for_belot.web.rest.util.PaginationUtil;
@@ -16,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -29,6 +34,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class GameResource {
+
+    @Inject
+    private UserService userService;
+
+    @Inject
+    ProfileService profileService;
 
     private final Logger log = LoggerFactory.getLogger(GameResource.class);
 
@@ -51,6 +62,14 @@ public class GameResource {
     @Timed
     public ResponseEntity<GameDTO> createGame(@Valid @RequestBody GameDTO gameDTO) throws URISyntaxException {
         log.debug("REST request to save Game : {}", gameDTO);
+
+        Optional<User> currentLoggedUser = userService.getUserWithAuthorities();
+
+        if(currentLoggedUser.isPresent()){
+            ProfileDTO currentUserProfile = profileService.findOne(currentLoggedUser.get().getId());
+            gameDTO.setCreatorProfileId(currentUserProfile.getId());
+        }
+
         if (gameDTO.getId() != null) {
             throw new BadRequestAlertException("A new game cannot already have an ID", ENTITY_NAME, "idexists");
         }

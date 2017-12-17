@@ -2,10 +2,13 @@ package eu.dreamix.four_for_belot.web.rest;
 
 import eu.dreamix.four_for_belot.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import eu.dreamix.four_for_belot.domain.Profile;
 import eu.dreamix.four_for_belot.domain.User;
+import eu.dreamix.four_for_belot.repository.ProfileRepository;
 import eu.dreamix.four_for_belot.repository.UserRepository;
 import eu.dreamix.four_for_belot.security.AuthoritiesConstants;
 import eu.dreamix.four_for_belot.service.MailService;
+import eu.dreamix.four_for_belot.service.ProfileService;
 import eu.dreamix.four_for_belot.service.UserService;
 import eu.dreamix.four_for_belot.service.dto.UserDTO;
 import eu.dreamix.four_for_belot.web.rest.errors.BadRequestAlertException;
@@ -25,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -64,6 +68,12 @@ public class UserResource {
 
     private final UserService userService;
 
+    @Inject
+    private ProfileService profileService;
+
+    @Inject
+    private ProfileRepository profileRepository;
+
     private final MailService mailService;
 
     public UserResource(UserRepository userRepository, UserService userService, MailService mailService) {
@@ -100,7 +110,12 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
-            mailService.sendCreationEmail(newUser);
+            Profile newProfile = new Profile();
+            newProfile.setUser(newUser);
+            profileRepository.save(newProfile);
+            profileRepository.flush();
+
+//            mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
                 .body(newUser);
