@@ -16,6 +16,8 @@ import {
     GameResolvePagingParams,
 } from './';
 
+import {ToolTipModule} from 'angular2-tooltip'
+
 const ENTITY_STATES = [
     ...gameRoute,
     ...gamePopupRoute,
@@ -23,6 +25,7 @@ const ENTITY_STATES = [
 
 @NgModule({
     imports: [
+        ToolTipModule,
         FourForBelotSharedModule,
         RouterModule.forChild(ENTITY_STATES)
     ],

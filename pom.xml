@@ -4,7 +4,7 @@
 
     <groupId>eu.dreamix.four_for_belot</groupId>
     <artifactId>four-for-belot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>war</packaging>
     <name>Four For Belot</name>
 
