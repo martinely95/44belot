@@ -1,17 +1,16 @@
 package eu.dreamix.four_for_belot.service;
 
+import eu.dreamix.four_for_belot.config.Constants;
 import eu.dreamix.four_for_belot.domain.Authority;
 import eu.dreamix.four_for_belot.domain.User;
 import eu.dreamix.four_for_belot.repository.AuthorityRepository;
 import eu.dreamix.four_for_belot.repository.PersistentTokenRepository;
-import eu.dreamix.four_for_belot.config.Constants;
 import eu.dreamix.four_for_belot.repository.UserRepository;
 import eu.dreamix.four_for_belot.security.AuthoritiesConstants;
 import eu.dreamix.four_for_belot.security.SecurityUtils;
-import eu.dreamix.four_for_belot.service.util.RandomUtil;
 import eu.dreamix.four_for_belot.service.dto.UserDTO;
-import eu.dreamix.four_for_belot.web.rest.vm.ManagedUserVM;
-
+import eu.dreamix.four_for_belot.service.util.RandomUtil;
+import eu.dreamix.four_for_belot.web.rest.AccountResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -22,10 +21,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import javax.inject.Inject;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -50,6 +53,9 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+
+    @Inject
+    private AccountResource accountResource;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
@@ -113,9 +119,9 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true);
         // new user gets registration key
-        newUser.setActivationKey(RandomUtil.generateActivationKey());
+//        newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
